@@ -19,6 +19,9 @@
     </style>
 @stop
 
+
+@include('closure.toastr')
+
 @section('content')
 
   	<div class="box box-primary"> 

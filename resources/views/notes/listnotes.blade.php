@@ -82,6 +82,7 @@
 
 		<div class="box-body">
 		
+			<div class="col-md-12">
 			<table id="table" class="table table-striped table-hover " cellspacing="0" width="100%">
 				<thead>
 					<tr>
@@ -103,7 +104,11 @@
 	                </tr>
 	            </tfoot>
 
-			</table>
+			</table>	
+			</div>
+			
+
+
 
 		</div>
 

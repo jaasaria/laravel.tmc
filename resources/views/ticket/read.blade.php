@@ -13,82 +13,95 @@
    <link rel="stylesheet" href=" {{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }} ">
 @stop
 
+
+@include('closure.toastr')
+
 @section('content')
 
     <div class="box box-primary">
 
-        <div class="box-header with-border clearfix">
-            <div class="mailbox-read-info">
-            
-                <span class="pull-right">
-                    <a href=" {{ route('ticket.index') }}" class="btn btn-primary">Back</a>
-                </span>
+        <div class="box-header with-border">
 
-                <h3><i class="fa fa-clone"></i> Category: Billing</h3>
-                <h5><i class="fa fa-book"></i> Subject: Request for Statement of Account</h5>
-                <span class="fa fa-calendar-o"> 15 Feb. 2016 11:03 PM </span>          
+               <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
+               <span class="pull-right">
+                  <a href=" {{ route('ticket.index') }}" class="btn btn-primary">Back</a>
+               </span>
+
+         </div>
+
+          {{-- {{ $ticket->category }} --}}
+
+         
+         <div class="box-body">
+            <div class="mailbox-read-info1 with-border1">
+                  <div class="row">
+                     <div class="col-md-12">
+                           <h3 style="margin-left: 10px">Ticket</h3>
+                           <div class="col-md-6">
+                    
+                              <h4><i class="fa fa-clone"></i> <small>Category: <b>{{ $ticket->category }}</b></small></h4>
+
+                              <h4><i class="fa fa-book"></i> <small>Subject: <b>{{ $ticket->subject }}</b></small></h4>
+
+                           </div>
+                           <div class="col-md-6">
+
+                              <h4><i class="fa fa-calendar-o"></i> <small>Created Date: <b>{{ $ticket->created_at->diffForHumans() }}</b></small></h4>
+
+                              <h4><i class="fa fa-calendar-o"></i> <small>Modify Date: <b>{{ $ticket->updated_at->diffForHumans() }}</b></small></h4>
+
+                           </div>
+                     </div>
+                  </div>   
+                 
+             </div>
+         </div>
+
+         <div class="box-footer">
+            <div class="row">
+               <div class="col-md-12">
+                   <div class="mailbox-read-message">
+                              {!!  $ticket->description !!}
+                     </div>
+
+               </div>
             </div>
+         </div>
+
+    </div>
 
 
-            <div class="mailbox-read-message">
-                    <p>Hello John,</p>
 
-                    <p>Keffiyeh blog actually fashion axe vegan, irony biodiesel. Cold-pressed hoodie chillwave put a bird
-                      on it aesthetic, bitters brunch meggings vegan iPhone. Dreamcatcher vegan scenester mlkshk. Ethical
-                      master cleanse Bushwick, occupy Thundercats banjo cliche ennui farm-to-table mlkshk fanny pack
-                      gluten-free. Marfa butcher vegan quinoa, bicycle rights disrupt tofu scenester chillwave 3 wolf moon
-                      asymmetrical taxidermy pour-over. Quinoa tote bag fashion axe, Godard disrupt migas church-key tofu
-                      blog locavore. Thundercats cronut polaroid Neutra tousled, meh food truck selfies narwhal American
-                      Apparel.</p>
 
-                    <p>Raw denim McSweeney's bicycle rights, iPhone trust fund quinoa Neutra VHS kale chips vegan PBR&amp;B
-                      literally Thundercats +1. Forage tilde four dollar toast, banjo health goth paleo butcher. Four dollar
-                      toast Brooklyn pour-over American Apparel sustainable, lumbersexual listicle gluten-free health goth
-                      umami hoodie. Synth Echo Park bicycle rights DIY farm-to-table, retro kogi sriracha dreamcatcher PBR&amp;B
-                      flannel hashtag irony Wes Anderson. Lumbersexual Williamsburg Helvetica next level. Cold-pressed
-                      slow-carb pop-up normcore Thundercats Portland, cardigan literally meditation lumbersexual crucifix.
-                      Wayfarers raw denim paleo Bushwick, keytar Helvetica scenester keffiyeh 8-bit irony mumblecore
-                      whatever viral Truffaut.</p>
 
-                    <p>Post-ironic shabby chic VHS, Marfa keytar flannel lomo try-hard keffiyeh cray. Actually fap fanny
-                      pack yr artisan trust fund. High Life dreamcatcher church-key gentrify. Tumblr stumptown four dollar
-                      toast vinyl, cold-pressed try-hard blog authentic keffiyeh Helvetica lo-fi tilde Intelligentsia. Lomo
-                      locavore salvia bespoke, twee fixie paleo cliche brunch Schlitz blog McSweeney's messenger bag swag
-                      slow-carb. Odd Future photo booth pork belly, you probably haven't heard of them actually tofu ennui
-                      keffiyeh lo-fi Truffaut health goth. Narwhal sustainable retro disrupt.</p>
 
-                    <p>Skateboard artisan letterpress before they sold out High Life messenger bag. Bitters chambray
-                      leggings listicle, drinking vinegar chillwave synth. Fanny pack hoodie American Apparel twee. American
-                      Apparel PBR listicle, salvia aesthetic occupy sustainable Neutra kogi. Organic synth Tumblr viral
-                      plaid, shabby chic single-origin coffee Etsy 3 wolf moon slow-carb Schlitz roof party tousled squid
-                      vinyl. Readymade next level literally trust fund. Distillery master cleanse migas, Vice sriracha
-                      flannel chambray chia cronut.</p>
 
-                    <p>Thanks,<br>Jane</p>
-                  </div>
+    <div class="box box-info">
+          <div class="box-body with-border">
+              <div class="col-md-12">
+                 <h3>Quick Reply</h3>
+                   
+                  {!! Form::open(['method' => 'POST', 'url' => (route('ticket.reply',$ticket->id)), 'class' => 'form-vertical']) !!}
 
+                        <div class="form-group{{ $errors->has('description') ? ' has-error' : ''}}">
+                                  {!! Form::textarea('description', null, ['class'=>'form-control','placeholder'=>'Description', 'required' => 'required']) !!}
+                                  <small class="text-danger">{{ $errors->first('description') }}</small>
+                        </div> 
+
+                        <div class="form-group text-center">
+                                   {{Form::button('<i class="fa fa-envelope-o"></i>  Reply Ticket', 
+                                    array('type' => 'submit','class'=> 'btn btn-primary',))
+                                    }}
+                        </div>
+
+                  {!! Form::close() !!}
+
+              </div>
         </div>
 
-
-
-
-      {{--   <div class="box-body with-border">
-
-
-
-
-
-        </div> --}}
-
-        <div class="box-footer with-border">
-           
-            <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
-             <div class="text-center">
-                <button type="button" class="btn btn-primary"><i class="fa fa-reply"></i> Reply</button>
-            </div>
+        <div class="box-footer with-border">     
         </div>
 
- 
     </div>
 
 @stop

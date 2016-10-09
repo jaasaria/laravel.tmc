@@ -1,15 +1,14 @@
 <?php
 
 
-
-
 //TICKET
 Route::group(['middleware' => 'auth','prefix' => 'tickets'],function(){
 	Route::get('/', ['uses' => 'TicketCtrl@index','as' => 'ticket.index']);
 	Route::get('/create', ['uses' => 'TicketCtrl@create','as' => 'ticket.create']);
-	Route::get('/read', ['uses' => 'TicketCtrl@read','as' => 'ticket.read']);
+	Route::get('/read/{id}', ['uses' => 'TicketCtrl@read','as' => 'ticket.read']);
 
 	Route::post('/store', ['uses' => 'TicketCtrl@store','as' => 'ticket.store']);
+	Route::post('/reply/{id}', ['uses' => 'TicketCtrl@StoreReply','as' => 'ticket.reply']);
 	Route::get('/get_all_data', ['uses' => 'TicketCtrl@get_all_data','as' => 'tickets.get_all_data']); //json format 
 	// - use only for fetching note data
 });

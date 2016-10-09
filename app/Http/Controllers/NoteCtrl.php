@@ -119,7 +119,7 @@ class NoteCtrl extends Controller
             })
 
         ->editColumn('title', ' 
-                         <div class="td-title"><small><i id="img-table" class="help-block fa fa-delicious"></i></small> {{ $title }} </div>
+                         <div class="td-title"><small></small> {{ $title }} </div>
                         ')
 
         ->editColumn('note', ' 

@@ -35,6 +35,10 @@ class ProfileCtrl extends Controller
 
     public function index()
     {
+
+        // $timezone = Config::get('test');
+
+
         $id =  Auth::user()->id;
         $profile = Profile::find($id);
         return view('profile.profile')->with('profile',$profile); 

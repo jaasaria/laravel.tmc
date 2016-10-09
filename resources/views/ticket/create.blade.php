@@ -48,13 +48,6 @@
                             <textarea id="compose-textarea" name="description" class="form-control" style="height: 300px">
                             </textarea>
                         </div>
-                        <div class="form-group">
-                            <div class="btn btn-default btn-file">
-                                <i class="fa fa-paperclip"></i> Attachment
-                                <input type="file" name="attachment">
-                            </div>
-                            <p class="help-block">Max. 32MB</p>
-                        </div>
 
                         <div class="form-group text-center">
                                {{Form::button('<i class="fa fa-envelope-o"></i>  Send Ticket', 

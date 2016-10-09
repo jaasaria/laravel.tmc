@@ -69,15 +69,18 @@
     $("#table1").DataTable();
 </script>
 
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> --}}
 
-<script src="../../bootstrap/js/bootstrap.min.js"></script>
-<script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<script src="../../plugins/fastclick/fastclick.js"></script>
+<script src=" {{ URL::asset('js/jquery.min.js') }} "></script>
 
-{{-- admin lte sources --}}
-<script src="../../dist/js/app.min.js"></script>
-<script src="../../dist/js/demo.js"></script>
+<script src=" {{ URL::asset('bootstrap/js/bootstrap.min.js') }} "></script>
+<script src=" {{ URL::asset('plugins/slimScroll/jquery.slimscroll.min.js') }} "></script>
+<script src=" {{ URL::asset('plugins/fastclick/fastclick.js') }} "></script>
+
+<script src=" {{ URL::asset('dist/js/app.min.js') }} "></script>
+<script src=" {{ URL::asset('dist/js/demo.js') }} "></script>
+
+
 
 
 {{-- under public folder --}}
